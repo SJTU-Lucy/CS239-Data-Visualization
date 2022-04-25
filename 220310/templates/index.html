@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online table editor</title>
+    <style>
+        td {
+            width: 10vw;
+            text-align: center;
+            background-color: whitesmoke;
+            border: 1px solid black;
+        }
+        table {
+            border-width: 1px;
+            border-style: solid;
+            background-color: lightgrey;
+            border-color: lightgrey;
+            padding: 1px;
+            width: fit-content;
+        }
+    </style>
+
+    <script>
+        function table_init(table) {
+            var initLen;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/update_hotel_info", true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("kbn-version", "5.3.0");
+            xhr.send(JSON.stringify({
+                "None": 1
+            }))
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    initLen = JSON.parse(xhr.responseText).female.length;
+                    let female = JSON.parse(xhr.responseText).female;
+                    let local = JSON.parse(xhr.responseText).local;
+                    let USA = JSON.parse(xhr.responseText).USA;
+                    let SA = JSON.parse(xhr.responseText).SA;
+                    let EU = JSON.parse(xhr.responseText).EU;
+                    let MEA = JSON.parse(xhr.responseText).MEA;
+                    let ASIA = JSON.parse(xhr.responseText).ASIA;
+                    let businessmen = JSON.parse(xhr.responseText).businessmen;
+                    let tourists = JSON.parse(xhr.responseText).tourists;
+                    let DR = JSON.parse(xhr.responseText).DR;
+                    let agency = JSON.parse(xhr.responseText).agency;
+                    let AC = JSON.parse(xhr.responseText).AC;
+                    let u20 = JSON.parse(xhr.responseText).u20;
+                    let _20to35 = JSON.parse(xhr.responseText)._20to35;
+                    let _35to55 = JSON.parse(xhr.responseText)._35to55;
+                    let m55 = JSON.parse(xhr.responseText).m55;
+                    let price = JSON.parse(xhr.responseText).price;
+                    let LoS = JSON.parse(xhr.responseText).LoS;
+                    let occupancy = JSON.parse(xhr.responseText).occupancy;
+                    let conventions = JSON.parse(xhr.responseText).conventions;
+                    let tArray = [];
+                    for (let i = 0; i < initLen; i++) {
+                        tArray[i] = [];
+                        tArray[i][0] = female[i]
+                        tArray[i][1] = local[i]
+                        tArray[i][2] = USA[i]
+                        tArray[i][3] = SA[i]
+                        tArray[i][4] = EU[i]
+                        tArray[i][5] = MEA[i]
+                        tArray[i][6] = ASIA[i]
+                        tArray[i][7] = businessmen[i]
+                        tArray[i][8] = tourists[i]
+                        tArray[i][9] = DR[i]
+                        tArray[i][10] = agency[i]
+                        tArray[i][11] = AC[i]
+                        tArray[i][12] = u20[i]
+                        tArray[i][13] = _20to35[i]
+                        tArray[i][14] = _35to55[i]
+                        tArray[i][15] = m55[i]
+                        tArray[i][16] = price[i]
+                        tArray[i][17] = LoS[i]
+                        tArray[i][18] = occupancy[i]
+                        tArray[i][19] = conventions[i]
+                    }
+                    let row = table.rows[1];
+                    for (let i = 1; i < row.cells.length; i++) {
+                        row.cells[i].innerHTML = tArray[0][i - 1];
+                    }
+                    for (let i = 1; i < initLen; i++) {
+                        add_row(table, tArray[i]);
+                    }
+                }
+            }
+        }
+
+        function update_hotel_info(table) {
+            let ret = get_table_data(table);
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "/update_hotel_info", true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("kbn-version", "5.3.0");
+            xhr.send(JSON.stringify({
+                "female": ret[0],
+                "local": ret[1],
+                "USA": ret[2],
+                "SA": ret[3],
+                "EU": ret[4],
+                "MEA": ret[5],
+                "ASIA": ret[6],
+                "businessmen": ret[7],
+                "tourists": ret[8],
+                "DR": ret[9],
+                "agency": ret[10],
+                "AC": ret[11],
+                "u20": ret[12],
+                "_20to35": ret[13],
+                "_35to55": ret[14],
+                "m55": ret[15],
+                "price": ret[16],
+                "LoS": ret[17],
+                "occupancy": ret[18],
+                "conventions": ret[19]
+            }))
+        }
+
+
+        function get_table_data(table) {
+            let ret = [];
+            for (let j = 1; j < table.getElementsByTagName("tr")[0].cells.length; j++) {
+                ret[j - 1] = [];
+            }
+            for (let i = 1; i < table.getElementsByTagName("tr").length; i++) {
+                for (let j = 1; j < table.getElementsByTagName("tr")[i].cells.length; j++) {
+                    ret[j - 1][i - 1] = table.getElementsByTagName("tr")[i].cells[j].innerHTML;
+                }
+            }
+            return ret;
+        }
+
+        function add_row(table, infoRow) {
+            let row = document.getElementById("emptyRow").cloneNode(true);
+            if (infoRow != null) {
+                for (let i = 1; i < row.cells.length; i++) {
+                    row.cells[i].innerHTML = infoRow[i - 1];
+                }
+            }
+            else {
+                for (let i = 1; i < row.cells.length; i++) {
+                    row.cells[i].innerHTML = "";
+                }
+            }
+            table.tBodies[0].appendChild(row);
+            return row;
+        }
+
+        function delete_row(table, row) {
+            for(let i = table.rows.length - 1; i > 0; i--) {
+                let chkOrder = table.rows[i].cells[0].firstChild;
+                if(chkOrder && chkOrder.type === "checkbox" && chkOrder.checked) {
+                    table.deleteRow(i);
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+<form method="post">
+    <h1 style="text-align: center">Online table editor</h1>
+    <table id="tabProduct" contenteditable="true">
+        <tr>
+            <td>Delete</td>
+            <td>female</td>
+            <td>local</td>
+            <td>usa</td>
+            <td>sa</td>
+            <td>eu</td>
+            <td>mea</td>
+            <td>asia</td>
+            <td>businessmen</td>
+            <td>tourists</td>
+            <td>dr</td>
+            <td>agency</td>
+            <td>ac</td>
+            <td>u20</td>
+            <td>20-35</td>
+            <td>35-55</td>
+            <td>m55</td>
+            <td>price</td>
+            <td>LoS</td>
+            <td>occupancy</td>
+            <td>conventions</td>
+        </tr>
+
+        <tr id="emptyRow" contenteditable="true">
+            <td><input type="checkbox" name="checkbox" value="checkbox" /></td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+    </table>
+
+    <br />
+    <div style="text-align: center">
+        <input type="button" name="add" value="Add" onclick="add_row(document.getElementById('tabProduct'), null)" />
+        <input type="button" name="delete" value="Delete" onclick="delete_row(document.getElementById('tabProduct'))" />
+        <input type="submit" name="submit" value="Submit" onclick="update_hotel_info(document.getElementById('tabProduct'));return false;" />
+    </div>
+    </form>
+
+    <script>
+        table_init(document.getElementById("tabProduct"));
+    </script>
+</body>
+</html>

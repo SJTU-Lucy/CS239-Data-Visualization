@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<!--解决中文乱码问题-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <style>
+        .header {
+            background-color:lightgrey;
+            color:black;
+            margin:0px;
+            padding-left:5px;
+        }
+        .wrap {
+            margin: 0 auto;
+            font-size: 20px;
+        }
+        .wrap span{
+            display: inline-block;
+            vertical-align: middle;
+            padding: 25px 0; /* 撑开高度 */
+        }
+        .wrap img{
+            width: 160px;
+            height: auto;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+<p class="wrap">
+    <img src="image.jpg" alt="Personal image">
+    <span>
+        <b>刘畅</b> <br />
+        手机：17757536825 &nbsp;&nbsp;&nbsp;&nbsp;
+        电子邮件：<a href="frenkiedejong@sjtu.edu.cn">frenkiedejong@sjtu.edu.cn</a> <br />
+        个人主页：<a href="https://github.com/SJTU-Lucy">https://github.com/SJTU-Lucy</a> <br />
+        期望职位：后端开发 &nbsp;&nbsp;&nbsp;&nbsp;
+        意向城市：上海
+    </span>
+
+</p>
+
+<div class="header">
+    <h2>教育经历：</h2>
+</div>
+<p>
+    <b>上海交通大学</b> 电子信息与电气工程学院 计算机科学与技术 2019.9-2023.6
+    <br />
+    <ul>
+        <li>GPA: ??/??</li>
+        <li>CET6: ???</li>
+    </ul>
+</p>
+
+<div class="header">
+    <h2>专业技能：</h2>
+</div>
+<p>
+    <ul>
+        <li><b>数据结构：</b>熟悉各种常见的数据结构，排序算法与图算法</li>
+        <li><b>计算机网络：</b>熟悉TCP/IP协议栈中的主要协议以及原理</li>
+        <li><b>操作系统：</b>了解进程管理，文件管理及内存管理的相关知识</li>
+        <li><b>计算机组成：</b>了解计算机体系结构，了解指令集的底层架构及原理</li>
+        <li><b>编程语言：</b>C++，python，Java</li>
+    </ul>
+</p>
+
+<div class="header">
+    <h2>项目经历：</h2>
+</div>
+<p>
+    <b>基于NFC的“一碰投屏”实现</b> 2021.9-2021.11 <br />
+    <a href="https://github.com/SJTU-Lucy/SJTU-CS339-2021-Fall-Project">
+        https://github.com/SJTU-Lucy/SJTU-CS339-2021-Fall-Project</a>
+    <ul>
+        <li><b>项目概述：</b>通过触碰NFC贴纸的方式将手机在PC端进行投屏，并且在PC端可反向操控手机；</li>
+        <li><b>项目描述：</b>首先建立adb连接，使用NFC贴纸存储的MAC地址，在局域网内查询对应的ip地址完成TCP连接，将本地ip地址发送至PC端，
+            PC端完成adb连接。投屏过程中手机端作为服务器发送显示信息，PC端作为客户端发送操作指令。手机端程序每次通过adb连接以.dex形式传入，
+            运行于后台，以减少对手机端用户的操作要求；</li>
+        <li><b>项目成果：</b>实现触碰NFC到建立adb连接用时0.5s内，完成较完整的多屏协同效果，实现使用鼠标动作模拟手势动作，包括点击、滑动、
+            滚动，以及键盘进行输入的功能；</li>
+    </ul>
+
+    <br />
+    <b>FSAE无人驾驶系统设计</b> 2021.6-至今 <br />
+    <a href="https://github.com/SRT-Autonomous/SRT2022">https://github.com/SRT-Autonomous/SRT2022</a>
+    <ul>
+        <li><b>项目概述：</b>为本校大学生方程式车队设计无人驾驶系统，以满足全国大学生无人方程式赛车中对无人驾驶系统的要求；</li>
+        <li><b>项目描述：</b>构建无人算法的整体框架，使用感知、路径规划和控制分离的模块化设计方案，模块间通过ROS进行数据通信。
+            在实际的编写中负责激光雷达感知、感知融合和路径规划；</li>
+        <li><b>项目成果：</b>各模块的初步测试在十一月基本完成，实车测试在一月完成，当前能较好地完成感知与路径规划的内容；</li>
+    </ul>
+</p>
+
+<div class="header">
+    <h2>组织经历：</h2>
+</div>
+<p>
+    <b>上海交通大学赛车队（SRT）</b> 2020.3-至今 <br />
+    组长|算法组<br />
+    我在无人车项目中负责重新构建无人算法的整体框架，确定使用感知、规划和控制的模块化设计方案，并在之后负责激光雷达感知和路径规划的编写。
+</p>
+
+</body>
+</html>

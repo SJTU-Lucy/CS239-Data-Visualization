@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Quicksort/Unique demo</title>
+    <script>
+        function quick_sort(arr,from,to) {
+            let i = from;
+            let j = to;
+            let key = arr[from];
+            if (from >= to) {
+                return;
+            }
+            while (i < j) {
+                while (arr[j] > key && i < j) {
+                    j--;
+                }
+                while (arr[i] <= key && i < j) {
+                    i++;
+                }
+                if (i < j) {
+                    var temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+            arr[from] = arr[i];
+            arr[i] = key;
+            quick_sort(arr, from, i - 1);
+            quick_sort(arr, i + 1, to);
+        }
+        function unique(arr) {
+            let array = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (array.indexOf(arr[i]) === -1) {
+                    array.push(arr[i])
+                }
+            }
+            return array;
+        }
+    </script>
+</head>
+
+<body>
+
+<input type="text" autocomplete="on" id="inputArray" placeholder="split with ',' such as: 1,2,3,4,5"
+       style="width:400px;height:40px;line-height:40px;" />
+<button id="quicksort">quicksort</button>
+<button id="unique">unique</button>
+<br />
+<div id="show"></div>
+<script type="text/javascript">
+    document.getElementById('quicksort').onclick = function(event) {
+        let arr = stringToArray(document.getElementById('inputArray').value);
+        quick_sort(arr, 0, arr.length-1)
+        document.getElementById('show').innerText = arr;
+    };
+    document.getElementById('unique').onclick = function(event) {
+        let arr = stringToArray(document.getElementById('inputArray').value);
+        arr = unique(arr)
+        document.getElementById('show').innerText = arr;
+    }
+    function stringToArray(str) {
+        var array = [];
+        var arr = str.split(',');
+        for(var i = 0; i<arr.length; i++) {
+            array.push(parseFloat(arr[i]));
+        }
+        return array;
+    }
+</script>
+
+</body>
+</html>
