@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online table editor</title>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <style>
+        td {
+            width: 10vw;
+            text-align: center;
+            background-color: whitesmoke;
+            border: 1px solid black;
+        }
+
+        table {
+            border-width: 1px;
+            border-style: solid;
+            background-color: lightgrey;
+            border-color: lightgrey;
+            padding: 1px;
+            width: fit-content;
+        }
+    </style>
+</head>
+
+
+<body>
+<form method="post">
+    <h1 style="text-align: center">Online table editor</h1>
+    <table id="tabProduct" contenteditable="true">
+        <tr>
+            <td>Delete</td>
+            <td>female</td>
+            <td>local</td>
+            <td>usa</td>
+            <<td>sa</td>
+            <td>eu</td>
+            <td>mea</td>
+            <td>asia</td>
+            <td>businessmen</td>
+            <td>tourists</td>
+            <td>dr</td>
+            <td>agency</td>
+            <td>ac</td>
+            <td>u20</td>
+            <td>20-35</td>
+            <td>35-55</td>
+            <td>m55</td>
+            <td>price</td>
+            <td>LoS</td>
+            <td>occupancy</td>
+            <td>conventions</td>
+        </tr>
+
+        <tr id="backup" contenteditable="true">
+            <td><input type="checkbox" name="checkbox" value="checkbox"/></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <br/>
+    <div style="text-align: center">
+        <input type="button" value="Add" onclick="add_row(document.getElementById('tabProduct'), null)"/>
+        <input type="button" value="Delete" onclick="delete_row(document.getElementById('tabProduct'))"/>
+        <input type="submit" value="Submit"
+               onclick="update_hotel_info(document.getElementById('tabProduct'));return false;"/>
+        <input type="button" value="Analysis" onclick="analysis(document.getElementById('tabProduct'))"/>
+    </div>
+    <div>
+        <div id="Histogram" style="float: left"></div>
+        <div id="Points" style="float: left"></div>
+        <div id="LoadedBar" style="float: left"></div>
+        <div id="Lines" style="float: left"></div>
+    </div>
+
+</form>
+
+<script rel="javascript" src="../static/js/Functions.js"></script>
+<script rel="javascript">
+    let tabProduct = document.getElementById("tabProduct");
+    table_init(tabProduct);
+</script>
+</body>
+</html>
