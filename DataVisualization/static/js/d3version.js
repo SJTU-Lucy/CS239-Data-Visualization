@@ -281,7 +281,6 @@ function updateSimulation() {
             .attr('x2', link => link.target.x)
             .attr('y2', link => link.target.y)
     })
-
     simulation.force('link').links(links)
     simulation.restart()
 }
@@ -289,9 +288,7 @@ function updateSimulation() {
 function Force() {
     node_init();
     link_init();
-    console.log(links);
-    console.log(nodes);
     setTimeout(function () {
         updateSimulation();
-    }, 200);
+    }, 500);
 }
