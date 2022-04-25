@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online table editor</title>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <style>
+        td {
+            width: 10vw;
+            text-align: center;
+            background-color: whitesmoke;
+            border: 1px solid black;
+        }
+
+        table {
+            border-width: 1px;
+            border-style: solid;
+            background-color: lightgrey;
+            border-color: lightgrey;
+            padding: 1px;
+            width: fit-content;
+        }
+
+        .box1 {
+            float: left;
+            width: 45%;
+            border: 2px solid black;
+        }
+
+        .box2 {
+            float: left;
+            width: 55%;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+
+<body>
+<form method="post">
+    <h1 style="text-align: center">Online table editor</h1>
+    <table id="tabProduct" contenteditable="true">
+        <tr>
+            <td>Delete</td>
+            <td>female</td>
+            <td>local</td>
+            <td>usa</td>
+            <td>sa</td>
+            <td>eu</td>
+            <td>mea</td>
+            <td>asia</td>
+            <td>businessmen</td>
+            <td>tourists</td>
+            <td>dr</td>
+            <td>agency</td>
+            <td>ac</td>
+            <td>u20</td>
+            <td>20-35</td>
+            <td>35-55</td>
+            <td>m55</td>
+            <td>price</td>
+            <td>LoS</td>
+            <td>occupancy</td>
+            <td>conventions</td>
+        </tr>
+
+        <tr id="backup" contenteditable="true">
+            <td><input type="checkbox" name="checkbox" value="checkbox"/></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <br/>
+    <div class="box1">
+        <div id="Echart" style="width: 40vw; height: 50vw"></div>
+    </div>
+    <div class="box2">
+        <div>
+            <input type="button" id="area" value="Area"
+                   onclick="choose(document.getElementById('tabProduct'), 0)"
+                   style="background-color: lightgreen"/>
+            <input type="button" id="group" value="Group"
+                   onclick="choose(document.getElementById('tabProduct'), 1)"
+                    style="background-color: lightgreen"/>
+            <input type="button" id="reservation" value="Reservation"
+                   onclick="choose(document.getElementById('tabProduct'), 2)"
+                    style="background-color: lightgreen"/>
+            <input type="button" id="age" value="Client's Age"
+                   onclick="choose(document.getElementById('tabProduct'), 3)"
+                    style="background-color: lightgreen"/>
+            <input type="button" id="gender" value="Gender"
+                   onclick="choose(document.getElementById('tabProduct'), 4)"
+                    style="background-color: lightgreen"/>
+            <input type="button" id="occupancy" value="Occupancy"
+                   onclick="choose(document.getElementById('tabProduct'), 5)"
+                    style="background-color: lightgreen"/>
+        </div>
+        <div id="LoadedBar"></div>
+    </div>
+
+
+</form>
+
+<script rel="javascript" src="../static/js/Functions.js"></script>
+<script rel="javascript">
+    let tabProduct = document.getElementById("tabProduct");
+    table_init(tabProduct);
+    window.onload = function() {
+        setTimeout("charts(document.getElementById('tabProduct'))", "200");
+        setTimeout("choose(document.getElementById('tabProduct'), 0)", "200");
+    }
+
+</script>
+</body>
+</html>
