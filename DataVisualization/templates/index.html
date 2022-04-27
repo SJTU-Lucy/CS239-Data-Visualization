@@ -17,6 +17,7 @@
 <body>
 
 <div id="3d-graph"></div>
+<div id="large"></div>
 <svg width="960" height="600"></svg>
 <div id="main" style="width: 80vw;height:80vh;"></div>
 
@@ -27,6 +28,15 @@
 <script>
     Force3D();
     eForce();
+</script>
+<script>
+    const elem = document.getElementById('large');
+
+    const Graph = ForceGraph3D()(elem)
+        .jsonUrl('../static/data/block.json')
+        .nodeAutoColorBy('user')
+        .nodeLabel(node => `${node.user}: ${node.description}`)
+        .onNodeClick(node => window.open(`https://bl.ocks.org/${node.user}/${node.id}`, '_blank'));
 </script>
 
 </body>
