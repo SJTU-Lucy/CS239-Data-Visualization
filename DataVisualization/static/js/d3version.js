@@ -285,10 +285,8 @@ function updateSimulation() {
     simulation.restart()
 }
 
-function Force() {
-    node_init();
-    link_init();
-    setTimeout(function () {
-        updateSimulation();
-    }, 500);
+async function Force() {
+    await node_init();
+    await link_init();
+    updateSimulation();
 }

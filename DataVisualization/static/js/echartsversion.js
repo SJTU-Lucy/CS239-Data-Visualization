@@ -5722,38 +5722,38 @@ var option;
 var data = {
     "type": "force",
     "categories": [{
-            "name": "Domain",
-            "keyword": {},
-            "base": "Domain"
-        }, {
-            "name": "IP",
-            "keyword": {},
-            "base": "IP"
-        }, {
-            "name": "Cert",
-            "keyword": {},
-            "base": "Cert"
-        }, {
-            "name": "Whois_Name",
-            "keyword": {},
-            "base": "Whois_Name"
-        }, {
-            "name": "Whois_Phone",
-            "keyword": {},
-            "base": "Whois_Phone"
-        }, {
-            "name": "Whois_Email",
-            "keyword": {},
-            "base": "Whois_Email"
-        }, {
-            "name": "IP_C",
-            "keyword": {},
-            "base": "IP_C"
-        }, {
-            "name": "ASN",
-            "keyword": {},
-            "base": "ASN"
-        }
+        "name": "Domain",
+        "keyword": {},
+        "base": "Domain"
+    }, {
+        "name": "IP",
+        "keyword": {},
+        "base": "IP"
+    }, {
+        "name": "Cert",
+        "keyword": {},
+        "base": "Cert"
+    }, {
+        "name": "Whois_Name",
+        "keyword": {},
+        "base": "Whois_Name"
+    }, {
+        "name": "Whois_Phone",
+        "keyword": {},
+        "base": "Whois_Phone"
+    }, {
+        "name": "Whois_Email",
+        "keyword": {},
+        "base": "Whois_Email"
+    }, {
+        "name": "IP_C",
+        "keyword": {},
+        "base": "IP_C"
+    }, {
+        "name": "ASN",
+        "keyword": {},
+        "base": "ASN"
+    }
     ]
 };
 var typeDir = {
@@ -5813,38 +5813,37 @@ function link_init() {
     }
 }
 
-function eForce() {
-    node_init();
-    link_init();
-    setTimeout(function () {
-        Json = data;
-        myChart.showLoading();
-        myChart.hideLoading();
-        option = {
-            legend: {
-                data: ['HTMLElement', 'WebGL', 'SVG', 'CSS', 'Other']
-            },
-            series: [
-                {
-                    type: 'graph',
-                    layout: 'force',
-                    animation: false,
-                    label: {
-                        position: 'right',
-                        formatter: '{b}'
-                    },
-                    draggable: true,
-                    data: Json.nodes,
-                    categories: Json.categories,
-                    force: {
-                        edgeLength: 5,
-                        repulsion: 20,
-                        gravity: 0.2
-                    },
-                    edges: Json.links
-                }
-            ]
-        };
-        myChart.setOption(option);
-    }, 500);
+async function eForce() {
+    await node_init();
+    await link_init();
+    console.log(data);
+    Json = data;
+    myChart.showLoading();
+    myChart.hideLoading();
+    option = {
+        legend: {
+            data: ['HTMLElement', 'WebGL', 'SVG', 'CSS', 'Other']
+        },
+        series: [
+            {
+                type: 'graph',
+                layout: 'force',
+                animation: false,
+                label: {
+                    position: 'right',
+                    formatter: '{b}'
+                },
+                draggable: true,
+                data: Json.nodes,
+                categories: Json.categories,
+                force: {
+                    edgeLength: 5,
+                    repulsion: 20,
+                    gravity: 0.2
+                },
+                edges: Json.links
+            }
+        ]
+    };
+    myChart.setOption(option);
 }
